@@ -1,6 +1,6 @@
 ---
 title: Linux发行版不完全客制与使用指南
-date: 2018-10-07 ‏‎21:22:52
+date: 2018-10-07 21:22:52
 tags: [linux,script]
 categories: [计算机民科]
 ---
