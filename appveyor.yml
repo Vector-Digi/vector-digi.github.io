@@ -1,0 +1,40 @@
+clone_depth: 5
+
+# 只编译源文件的分支
+branches:
+  only:
+  - dev
+
+environment:
+  my_variable:
+    secure: gSplsbGhSaHas/z9SGKN8SBcIFAr1r9Sx7yCMp/5rHwCeHR4TCvGT2rJjRA1DrxA
+
+install:
+#  - git submodule update --init --recursive
+  - ps: Install-Product node 12 x86
+  - node --version
+  - npm --version
+  - npm install
+  - npm install hexo-cli -g
+
+
+build_script:
+  - hexo generate
+
+artifacts:
+  - path: public
+
+on_success:
+  - git config --global credential.helper store
+  - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:my_variable):x-oauth-basic@github.com`n"
+  - git config --global user.email "%GIT_USER_EMAIL%"
+  - git config --global user.name "%GIT_USER_NAME%"
+  - git clone --depth 5 -q --branch=%TARGET_BRANCH% %STATIC_SITE_REPO% %TEMP%\static-site
+  - cd %TEMP%\static-site
+  - del * /f /q
+  - for /d %%p IN (*) do rmdir "%%p" /s /q
+  - SETLOCAL EnableDelayedExpansion & robocopy "%APPVEYOR_BUILD_FOLDER%\public" "%TEMP%\static-site" /e & IF !ERRORLEVEL! EQU 1 (exit 0) ELSE (IF !ERRORLEVEL! EQU 3 (exit 0) ELSE (exit 1))
+  - git add -A
+  - git commit -m "Update Static Site"
+  - git push origin %TARGET_BRANCH%
+  - appveyor AddMessage "Static Site Updated"
