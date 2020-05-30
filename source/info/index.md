@@ -1,5 +1,5 @@
 ---
-layout: contact
+layout: info
 title: INFO
 date: 2020-05-30 21:48:05
 tags:

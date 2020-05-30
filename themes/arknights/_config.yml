@@ -41,6 +41,7 @@ menu:
 #  About: /about
 #  Contact: /contact
   Archives: /archives
+  Info: /info
 
 # stylesheets loaded in the <head>
 stylesheets:
