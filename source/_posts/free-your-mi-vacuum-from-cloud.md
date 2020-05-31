@@ -2,7 +2,7 @@
 title: 小米扫地机器人反隐私搜集改造
 date: 2019-06-23 22:32:19
 tags: [IoT]
-categories: [计算机民科,消费电子]
+categories: [消费电子]
 ---
 让你的小米扫地机器人脱离米家APP工作  
 <!-- more -->  

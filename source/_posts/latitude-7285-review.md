@@ -3,9 +3,8 @@ title: 生态化的精致——从Dell Latitude 7285谈二合一
 date: 2020-05-30 19:13:53
 tags: [2 in 1,USB]
 categories: [消费电子]
-description: 
 ---
-![Cover](https://i.loli.net/2020/05/30/f8r4iaVX9Ly2Bsg.png)
+![Cover](https://i.loli.net/2020/05/30/f8r4iaVX9Ly2Bsg.png)  
 Attention: This is an uncomplete article. Please keep focus on the following uptate.  
 <!-- more -->  
 ## 后PC时代的曙光  
@@ -27,7 +26,7 @@ Attention: This is an uncomplete article. Please keep focus on the following upt
 &emsp;&emsp;虽然Surface Book 3确实做到了，但在等到它发售之前，就有一款产品已经足够打动我了，这就是Dell Latitude 7285。
 
 ## 喜闻乐见的评测  
-&emsp;&emsp;拜人傻钱多戴的主流舆论所赐我能用实惠的价格淘到了Latitude 7285的官翻机，并通过完善的全球保修政策换新了一些有瑕疵的部件，在过保后又动手给它加装了LTE模块和WiFi6网卡，在它服役的过程中越来越趁手。  
+&emsp;&emsp;拜人傻钱多戴的主流舆论所赐我能用实惠的价格淘到了Latitude 7285的官翻机，并通过完善的全球保修政策换新了一些有瑕疵的部件，过保后又动手加装了LTE模块和WiFi6网卡，现在已然成为了我最可靠的随身设备之一。  
 ### 外观
     
 

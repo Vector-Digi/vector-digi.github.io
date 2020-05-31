@@ -22,11 +22,11 @@ categories: [计算机民科]
 仅以存储级别打包一个文件，在命令行键入  
 `zip -r -0 xx.zip xx/`  
 对于linux常见的压缩格式:  
-压缩格式 | 解压命令
---- | ---------
-.tar.gz | `tar -zxvf xx.tar.gz`
-.tar.bz2 | `tar -jxvf xx.tar.bz2`
-.tar.xz | `xz -d && tar -xf`
+压缩格式 | 解压命令  
+ :-: | :-:  
+.tar.gz | `tar -zxvf xx.tar.gz`  
+.tar.bz2 | `tar -jxvf xx.tar.bz2`  
+.tar.xz | `xz -d && tar -xf`  
 
 ## 安装与卸载
 #### 清除所有已删除包的残馀配置文件
@@ -40,5 +40,6 @@ categories: [计算机民科]
 `fang -s`  
 类似于aircrack-ng扫描WLAN设备，但不是所有的蓝牙硬件都支持长时间高频扫描  
 #### 赋予shell全局代理  
-在命令行键入`export ALL_proxy=http://ip:port`  
+在命令行键入  
+`export ALL_proxy=http://ip:port`  
 并不总是有条件享受透明代理环境的，不是吗  

@@ -32,8 +32,8 @@ archives:
 
 # Valine 无后端评论系统
 valine:
-  app_id: # <APP ID>
-  app_key: # <APP KEY>
+  app_id: bGn6yDw8mXsPxJQnWii2TAMH-MdYXbMMI
+  app_key: uCdhx9nO9hwKPk7Q8WOXq064
 
 # main menu navigation
 menu:
