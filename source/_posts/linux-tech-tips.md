@@ -20,13 +20,11 @@ categories: [计算机民科]
 ## 文件处理  
 #### 压缩与解压  
 仅以存储级别打包一个文件，在命令行键入  
-`zip -r -0 xx.zip xx/`  
+`zip -r -0 folder.zip folder/`  
 对于linux常见的压缩格式:  
-压缩格式 | 解压命令  
- :-: | :-:  
-.tar.gz | `tar -zxvf xx.tar.gz`  
-.tar.bz2 | `tar -jxvf xx.tar.bz2`  
-.tar.xz | `xz -d && tar -xf`  
+`tar -zxvf xx.tar.gz`  
+`tar -jxvf xx.tar.bz2`  
+`xz -d && tar -xf`  
 
 ## 安装与卸载
 #### 清除所有已删除包的残馀配置文件
