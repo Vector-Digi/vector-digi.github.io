@@ -1,5 +1,5 @@
 ---
-title: 生态化的精致——从Dell Latitude 7285谈二合一
+title: 生态化的精致:从Dell Latitude 7285谈二合一
 date: 2020-05-30 19:13:53
 tags: [2 in 1,USB]
 categories: [消费电子]
