@@ -4,7 +4,7 @@ date: 2020-05-30 19:13:53
 tags: [2 in 1,USB]
 categories: [消费电子]
 ---
-![Cover](https://i.loli.net/2020/05/30/f8r4iaVX9Ly2Bsg.png)  
+![Cover](https://i.loli.net/2020/06/03/tLZN23MdWTB6Oba.jpg)  
 Attention: This is an uncomplete article. Please keep focus on the following uptate.  
 <!-- more -->  
 ## 后PC时代的曙光  
