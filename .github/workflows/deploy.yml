@@ -28,4 +28,4 @@ jobs:
             git config --global user.email ionsuite@gmail.com
             git add -A
             git commit -m "Static site updated at $(date +'%Y-%m-%d %H:%M:%S')"
-            git push --force --quiet "https://${{ secrets.CI_TOKEN }}@github.com/Vector-Digi/vector-digi.github.iomaster:master
+            git push --force --quiet "https://${{ secrets.CI_TOKEN }}@github.com/Vector-Digi/vector-digi.github.io" master:master
