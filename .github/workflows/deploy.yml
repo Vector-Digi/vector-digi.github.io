@@ -1,0 +1,39 @@
+name: CI
+on:
+    push:
+        branches: 
+            - dev
+
+env:
+    GIT_USER: JKSTAFF
+    GIT_EMAIL: ionsuite@gmail.com
+    GIT_REPO: https://github.com/Vector-Digi/vector-digi.github.io
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+        - name: Check out repository
+            uses: actions/checkout@v2
+        - name: Setup nodeJS
+            uses: actions/setup-node@v1
+            with:
+                node-version: '12.x'
+        - name: Install hexo dependencies
+            run: |
+                npm install hexo-cli gulp -g
+                npm install
+        - name: Generate files
+            run: |
+            hexo clean
+            hexo generate
+        - name: Execute gulp task
+            run: gulp
+        - name: Deploy static site
+            run: |
+                cd ./public && git init && git add .
+                git config --global user.name $GIT_USER
+                git config --global user.email $GIT_EMAIL
+                git add -A
+                git commit -m "Static site updated at $(date +'%Y-%m-%d %H:%M:%S')"
+                git push --force --quiet "https://${{ secrets.CI_TOKEN }}@$GIT_REPO" master:master
