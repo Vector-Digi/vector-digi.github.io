@@ -4,11 +4,6 @@ on:
         branches: 
             - dev
 
-env:
-    GIT_USER: JKSTAFF
-    GIT_EMAIL: ionsuite@gmail.com
-    GIT_REPO: https://github.com/Vector-Digi/vector-digi.github.io
-
 jobs:
     build:
         runs-on: ubuntu-latest
@@ -32,8 +27,8 @@ jobs:
         - name: Deploy static site
             run: |
                 cd ./public && git init && git add .
-                git config --global user.name $GIT_USER
-                git config --global user.email $GIT_EMAIL
+                git config --global user.name JKSTAFF
+                git config --global user.email ionsuite@gmail.com
                 git add -A
                 git commit -m "Static site updated at $(date +'%Y-%m-%d %H:%M:%S')"
-                git push --force --quiet "https://${{ secrets.CI_TOKEN }}@$GIT_REPO" master:master
+                git push --force --quiet "https://${{ secrets.CI_TOKEN }}@github.com/Vector-Digi/vector-digi.github.iomaster:master
