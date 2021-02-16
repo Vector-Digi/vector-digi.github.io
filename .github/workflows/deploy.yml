@@ -3,32 +3,31 @@ on:
     push:
         branches: 
             - dev
-
 jobs:
     build:
+        name: Hexo blog build & deploy
         runs-on: ubuntu-latest
         steps:
-        - name: Check out repository
-            uses: actions/checkout@v2
+        - uses: actions/checkout@v2
         - name: Setup nodeJS
-            uses: actions/setup-node@v1
-            with:
-                node-version: '12.x'
+          uses: actions/setup-node@v1
+          with:
+            node-version: '12.x'
         - name: Install hexo dependencies
-            run: |
-                npm install hexo-cli gulp -g
-                npm install
+          run: |
+            npm install hexo-cli gulp -g
+            npm install
         - name: Generate files
-            run: |
+          run: |
             hexo clean
             hexo generate
         - name: Execute gulp task
-            run: gulp
+          run: gulp
         - name: Deploy static site
-            run: |
-                cd ./public && git init && git add .
-                git config --global user.name JKSTAFF
-                git config --global user.email ionsuite@gmail.com
-                git add -A
-                git commit -m "Static site updated at $(date +'%Y-%m-%d %H:%M:%S')"
-                git push --force --quiet "https://${{ secrets.CI_TOKEN }}@github.com/Vector-Digi/vector-digi.github.iomaster:master
+          run: |
+            cd ./public && git init && git add .
+            git config --global user.name JKSTAFF
+            git config --global user.email ionsuite@gmail.com
+            git add -A
+            git commit -m "Static site updated at $(date +'%Y-%m-%d %H:%M:%S')"
+            git push --force --quiet "https://${{ secrets.CI_TOKEN }}@github.com/Vector-Digi/vector-digi.github.iomaster:master
