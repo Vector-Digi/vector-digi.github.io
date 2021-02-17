@@ -15,15 +15,13 @@ jobs:
             node-version: '12.x'
         - name: Install hexo dependencies
           run: |
-            npm install hexo-cli gulp -g
+            npm install hexo-cli -g
             npm install
             npm install --save hexo-server hexo-browsersync hexo-renderer-pug hexo-renderer-sass hexo-renderer-ts hexo-helper-live2d
         - name: Generate site sources
           run: |
             hexo clean
             hexo generate
-        - name: Compress data format
-          run: gulp
         - name: Deploy static site
           run: |
             cd ./public && git init && git add .
