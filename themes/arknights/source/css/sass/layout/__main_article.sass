@@ -3,6 +3,8 @@ article
   min-width: 1px
   max-height: 100%
   overflow-y: auto
+  #post-content p, .recent-excerpt p
+    line-height: 150%
 
 .recent-post
   color: #898989
@@ -10,9 +12,8 @@ article
   margin-bottom: -1px
   border: 1px solid #898989
   padding: 13px 15px
-  // background-color: rgba(#141516, .8)
   transition: .3s
-  *, .recent-info::after
+  .recent-info::after
     transition: .3s
   object
     h1, h2, h3, h4, h5, h6

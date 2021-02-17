@@ -23,12 +23,12 @@ body {
   margin: 0 auto;
   color: #c4c4c4;
   background-color: #141516;
-  background-image: url(https://i.loli.net/2020/05/30/HWETKLthSPodDYC.jpg);
+  background-image: url(https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg);
   background-attachment: fixed;
   background-position: 50% 40px;
   background-repeat: no-repeat;
   background-size: cover;
-  font-family: "JetBrains Mono", sans-serif;
+  font-family: "JetBrains Mono", 'Microsoft YaHei', '\5b8b\4f53', sans-serif;
   display: flex;
   flex-direction: column;
   align-items: stretch; }
@@ -69,8 +69,15 @@ kbd {
   padding: 0 3px;
   font-family: "JetBrains Mono"; }
 
-strong em {
-  color: #ec3000; }
+em {
+  font-family: Times, "Times New Roman", 'FangSong', 'SimSun', serif; }
+
+strong, em {
+  color: #fff; }
+
+strong em, em strong {
+  font-family: "JetBrains Mono", 'Microsoft YaHei', '\5b8b\4f53', sans-serif;
+  color: #C0392B; }
 
 blockquote {
   border-left: #2bf solid 5px;
@@ -96,14 +103,6 @@ table {
     border: #2bf solid 1px; }
     table td:hover {
       background-color: rgba(34, 187, 255, 0.1); }
-
-@font-face {
-  font-family: BenderLight;
-  src: local("Bender"), url("/font/BenderLight.ttf"); }
-
-@font-face {
-  font-family: 'JetBrains Mono';
-  src: local("JetBrains Mono"), url("/font/JetBrainsMono-Regular.woff2") format("woff2"); }
 
 .text-title, .text-content {
   height: 18px;
@@ -211,6 +210,11 @@ table {
   color: #fff;
   background-color: #494949; }
 
+.mermaid {
+  margin: 10px 0;
+  padding: 10px;
+  text-align: center; }
+
 header {
   position: sticky;
   top: 0;
@@ -261,6 +265,8 @@ article {
   min-width: 1px;
   max-height: 100%;
   overflow-y: auto; }
+  article #post-content p, article .recent-excerpt p {
+    line-height: 150%; }
 
 .recent-post {
   color: #898989;
@@ -269,7 +275,7 @@ article {
   border: 1px solid #898989;
   padding: 13px 15px;
   transition: .3s; }
-  .recent-post *, .recent-post .recent-info::after {
+  .recent-post .recent-info::after {
     transition: .3s; }
   .recent-post object h1, .recent-post object h2, .recent-post object h3, .recent-post object h4, .recent-post object h5, .recent-post object h6 {
     font-size: large;
@@ -485,6 +491,21 @@ aside {
 #post-content table {
   width: 100%; }
 
+#post-content .footnote-ref:before {
+  content: '';
+  display: inline-block;
+  margin-top: -60px;
+  width: 1px;
+  height: 60px;
+  visibility: hidden; }
+
+#post-content .footnotes ol li:before {
+  content: '';
+  display: block;
+  margin-top: -60px;
+  height: 60px;
+  visibility: hidden; }
+
 #post-footer hr {
   border-color: #fe2; }
 
@@ -560,9 +581,12 @@ aside {
     color: #2bf; }
     #Valine .vcard .vnick:hover {
       color: #000; }
+  #Valine .vsys {
+    background-color: transparent; }
   #Valine .vmeta .vat {
     color: #fe2; }
   #Valine .vcontent {
+    color: #c4c4c4;
     border-left: #fe2 solid 3px;
     padding-left: 20px;
     background-color: rgba(255, 255, 255, 0.05);
@@ -574,6 +598,9 @@ aside {
       background: linear-gradient(180deg, rgba(26, 26, 26, 0), rgba(26, 26, 26, 0.9)); }
     #Valine .vcontent::after {
       background: rgba(26, 26, 26, 0.9); }
+    #Valine .vcontent p {
+      color: #fff;
+      padding-bottom: 14px; }
 
 #veditor {
   color: #fff;
@@ -619,15 +646,16 @@ aside {
   justify-content: stretch; }
 
 #archive-aside {
+  height: 100%;
   display: flex;
   order: -1;
   flex-grow: 1;
   flex-direction: column; }
 
 #Archives, #Categories, #Tags {
-  height: 100%;
   margin: 0 10px;
-  background-color: rgba(20, 21, 22, 0.8); }
+  background-color: rgba(20, 21, 22, 0.8);
+  overflow-y: auto; }
   #Archives, #Archives h1, #Categories, #Categories h1, #Tags, #Tags h1 {
     transition: .3s; }
   #Archives h1, #Categories h1, #Tags h1 {
@@ -643,6 +671,7 @@ aside {
       background-color: #2bf; }
 
 #Archives {
+  height: 100%;
   flex-grow: 5; }
   #Archives h2 {
     margin: 10px 0;
@@ -667,10 +696,12 @@ aside {
   padding: 10px; }
 
 #Categories {
+  height: 50%;
   flex-grow: 1;
   margin-bottom: 20px; }
 
 #Tags {
+  height: 100%;
   flex-grow: 1; }
 
 #navigation a {
@@ -762,7 +793,9 @@ aside {
     aside a img {
       transition: background-color 1s; }
       aside a img:hover {
-        background-color: rgba(255, 255, 255, 0.1); } }
+        background-color: rgba(255, 255, 255, 0.1); }
+  #archive-aside {
+    max-width: 36%; } }
 
 @media (min-width: 992px) {
   body {

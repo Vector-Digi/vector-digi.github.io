@@ -60,18 +60,18 @@ block content
       a#to-top(href="#post-title" title="to top") ∧
     if reward === true
       details#reward
-        summary 打赏
+        summary 赞助
         #bitcoin
           span 比特币 | Bitcoin
           br
-          img(src='/img/bitcoin.png')
+          img(src= config.root + '/img/bitcoin.png')
     #Valine
     script
       |new Valine({
       |  el: '#Valine'
       |  , appId: '#{appID}'
       |  , appKey: '#{appKey}'
-      |  , placeholder: '此条评论委托企鹅物流发送'
+      |  , placeholder: '评论区由Valine驱动'
       |})
 
 block aside-block

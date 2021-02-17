@@ -5,11 +5,11 @@ on:
             - dev
 jobs:
     build:
-        name: Hexo blog build & deploy
+        name: Website rendering 
         runs-on: ubuntu-latest
         steps:
         - uses: actions/checkout@v2
-        - name: Setup nodeJS
+        - name: Setup nodeJS enviroment
           uses: actions/setup-node@v1
           with:
             node-version: '12.x'
@@ -17,10 +17,13 @@ jobs:
           run: |
             npm install hexo-cli gulp -g
             npm install
-        - name: Generate files
+            npm install --save hexo-server hexo-browsersync hexo-renderer-pug hexo-renderer-sass hexo-renderer-ts hexo-helper-live2d
+        - name: Generate site sources
           run: |
             hexo clean
             hexo generate
+        - name: Compress data format
+          run: gulp
         - name: Deploy static site
           run: |
             cd ./public && git init && git add .
