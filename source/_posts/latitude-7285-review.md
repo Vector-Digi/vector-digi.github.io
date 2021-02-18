@@ -5,7 +5,7 @@ tags: [2 in 1,USB]
 categories: [消费电子]
 ---
 ![Cover](https://i.loli.net/2020/06/03/tLZN23MdWTB6Oba.jpg)  
-Attention: This is an uncomplete article. Please keep focus on the following uptate.  
+截至本文编辑时间，暂时没有找到竞品或迭代的好物  
 <!-- more -->  
 ## 后PC时代的曙光  
 &emsp;&emsp;看到这台VAIO Canvas Z的时候我还在社团里剪着AMV，立刻被这平板造型的性能怪兽所震撼。“移动生产力”的概念从此扎根在了我的消费电子价值观中。而随着Windows 7的退役，微软也开始软硬兼施地在触摸交互领域追赶苹果iPad系列的脚步。给出的答案就是向厂商和消费者阐述二合一产品概念的Surface系列和不断试错形成的配套操作逻辑Windows 10。
