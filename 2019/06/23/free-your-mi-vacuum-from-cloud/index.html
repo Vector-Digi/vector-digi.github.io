@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>小米扫地机器人反隐私搜集改造 | 矢量數位</title><script src="https://cdn.bootcss.com/valine/1.4.4/Valine.min.js"></script><link rel="stylesheet" href="/css/arknights.css"><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.1.2/styles/atom-one-dark-reasonable.min.css"><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><meta name="generator" content="Hexo 5.3.0"></head><body><header><nav><a href="/">Home</a><a href="/archives/">Archives</a></nav></header><main><article><div id="post-bg"><div id="post-title"><div id="post-info"><span>date:<time datetime="2019-06-23T14:32:19.000Z" id="date"> 2019-06-23</time></span><br><span>updated:<time datetime="2021-02-18T03:26:44.793Z" id="updated"> 2021-02-18</time></span></div><h1>小米扫地机器人反隐私搜集改造</h1><hr></div><div id="post-content"><p>让你的小米扫地机器人脱离米家APP工作  </p>
+<a id="more"></a>  
+<p>&emsp;&emsp;米家系列产品以其廉价但生态丰富的解决方案为消费者带来了甜品级的智能家居体验。在享受其精致的硬件产品的同时，对伴随而来的品牌生态绑架和不平等用户使用条款，我们亦有权利与技术手段对它们说不。越来越多的人选择使用开放智能家居平台来接管各种物联网产品，在有效防止商业或政治用途的隐私数据采集隐患，同时也让多品牌产品之间的功能联动成为可能。<br>&emsp;&emsp;本文作为以<a target="_blank" rel="noopener" href="https://www.home-assistant.io/">Home Assistant</a>为核心构建高客制化程度、隐私保护护级别和设备选型灵活性的智能家居系统的一部分，对小米扫地机器人及其后续机型提供了一种不同于<a target="_blank" rel="noopener" href="https://www.home-assistant.io/">HA官方集成</a>的接入方式，在保留绝大部分原厂功能的前提下完全阻断向小米公司广域网服务器的数据传输。  </p>
+<h2 id="支持型号"><a href="#支持型号" class="headerlink" title="支持型号"></a>支持型号</h2><ol>
+<li>Xiaomi Vacuum Gen1  </li>
+<li>Roborock Vacuum Gen2 S50/S51/S55  </li>
+</ol>
+<h2 id="前期准备工作"><a href="#前期准备工作" class="headerlink" title="前期准备工作"></a>前期准备工作</h2><ol>
+<li>获取米家设备token<br>与HA官方集成步骤一致，我们需要通过<code>xiaomi_miio</code>接管设备的数据读写，安装步骤本例程不再赘述。</li>
+</ol>
+<ul>
+<li>对于安卓用户，下载修改版的<a target="_blank" rel="noopener" href="https://cloud.mail.ru/public/33J3/t817u4Snr">米家App</a>，按照常规方式进行配对连接后，在应用程式里选中扫地机器人，进入菜单配置/常规设置/网络信息选项卡查看当前token(更快捷)</li>
+<li>对于PC用户，可以遵循<a target="_blank" rel="noopener" href="https://www.home-assistant.io/components/vacuum.xiaomi_miio/#retrieving-the-access-token">这篇文章</a>跳过常规方式配对连接直接获取token(更安全)  </li>
+</ul>
+<ol start="2">
+<li>在路由器中固化扫地机器人IP地址<br>为方便后期调试与Home Assistant接入，建议在路由器中设置不变的IP地址并做ARP映射。  </li>
+</ol>
+<p>&emsp;&emsp;如果你完成了上述步骤，请在纸上记下扫地机器人的token和IP地址直到它下一次系统重置。</p>
+<h2 id="将扫地机器人固件更新为国际版"><a href="#将扫地机器人固件更新为国际版" class="headerlink" title="将扫地机器人固件更新为国际版"></a>将扫地机器人固件更新为国际版</h2><p>&emsp;&emsp;此步骤非必要。但考虑到消费电子产品在中国大陆地区与其他地区的用户使用条款之间的巨大差异，即使不进行进一步的Hack，刷写国际版固件的设备也将使用户享受到诸如<a target="_blank" rel="noopener" href="https://eugdpr.org/">GDPR</a>等政策的保护，推荐遵循<a target="_blank" rel="noopener" href="https://xiaomirobot.wordpress.com/transformer-un-modele-china-edition-vers-international/">这篇文章</a>执行转区操作。  </p>
+<h2 id="自制固件"><a href="#自制固件" class="headerlink" title="自制固件"></a>自制固件</h2><ol>
+<li>下载特定版本的国际版固件作为修改基础  </li>
+</ol>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://cdn.awsbj0.fds.api.mi-img.com/updpkg/v11_003468.fullos.pkg">小米机器人1代固件</a>  </li>
+<li><a target="_blank" rel="noopener" href="https://cdn.awsbj0.fds.api.mi-img.com/rubys/updpkg/v11_001886.fullos.pkg">石头扫地机器人2代(S5x)固件</a>  </li>
+</ul>
+<ol start="2">
+<li>使用Valetudo重构固件<br>遵循<a target="_blank" rel="noopener" href="https://github.com/Hypfer/Valetudo/wiki/Installation-Instructions">这篇文章</a>将root权限的ssh登录密钥和带有高级功能的WebUI编入固件并刷写。</li>
+</ol>
+<h2 id="语音客制化"><a href="#语音客制化" class="headerlink" title="语音客制化"></a>语音客制化</h2><p>如果想让扫地机器人语音更换为特定国家，可以在<a target="_blank" rel="noopener" href="https://dustbuilder.xvm.mit.edu/pkg/voice/">这里</a>下载对应语种的语音包并刷写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mirobo --ip [vacuum_ip] --token [your_token] install-sound &#x2F;path&#x2F;to&#x2F;xx.pkg</span><br></pre></td></tr></table></figure>
+<h2 id="感受"><a href="#感受" class="headerlink" title="感受"></a>感受</h2><p>&emsp;&emsp;物联网的发展正在消费者与企业之间日趋不对称的技术力与情报量下逐渐失去控制。万物联网的下一个10年，消费者应当关心的不再只有商品的物质价值，更多的是其背后巨大信息量带来的种种权宜。当代人过分看轻自己所产生的信息的价值，在远高于大脑处理能力的信息流中迷失自我，使得赛博科幻作品中的担忧逐渐成为现实。而在下一次更有人性和温度的信息技术革命来临之前，隐私保护更像是一种自发的的止损行为，尽管从旁观者角度看起来是那么地徒劳。  </p>
+<div id="paginator"></div></div><div id="post-footer"><hr><a href="/2019/09/27/automatic-static-site-building/">← Prev hexo自动化建站维护技巧</a><span style="color: #fe2"> | </span><a href="/2018/10/07/linux-tech-tips/">Linux发行版不完全客制与使用指南 Next →</a><hr></div><div id="bottom-btn"><a id="to-index" href="#post-index" title="index">≡</a><a id="to-top" href="#post-title" title="to top">∧</a></div><details id="reward"><summary>赞助</summary><div id="bitcoin"><span>比特币 | Bitcoin</span><br><img src="/img/bitcoin.png"></div></details><div id="Valine"></div><script>new Valine({
+ el: '#Valine'
+ , appId: 'bGn6yDw8mXsPxJQnWii2TAMH-MdYXbMMI'
+ , appKey: 'uCdhx9nO9hwKPk7Q8WOXq064'
+ , placeholder: '评论区由Valine驱动'
+})</script></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://vectordigi.cf/img/logo.png" alt="Logo"></a><h1 id="Dr"><a href="/"> Dr.Vector Di-gi</a></h1><section id="total"><a id="total-archives" href="/archives"><span class="total-title">Archives Total:</span><span class="total-number">4</span></a><div id="total-tags"><span class="total-title">Tags:</span><span class="total-number">7</span></div><div id="total-categories"><span class="total-title">Categories:</span><span class="total-number">2</span></div></section></div><div id="aside-block"><h1>INDEX</h1><div id="post-index"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%AF%E6%8C%81%E5%9E%8B%E5%8F%B7"><span class="toc-number">1.</span> <span class="toc-text">支持型号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">前期准备工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%86%E6%89%AB%E5%9C%B0%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%9B%BA%E4%BB%B6%E6%9B%B4%E6%96%B0%E4%B8%BA%E5%9B%BD%E9%99%85%E7%89%88"><span class="toc-number">3.</span> <span class="toc-text">将扫地机器人固件更新为国际版</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%88%B6%E5%9B%BA%E4%BB%B6"><span class="toc-number">4.</span> <span class="toc-text">自制固件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%AD%E9%9F%B3%E5%AE%A2%E5%88%B6%E5%8C%96"><span class="toc-number">5.</span> <span class="toc-text">语音客制化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%84%9F%E5%8F%97"><span class="toc-number">6.</span> <span class="toc-text">感受</span></a></li></ol></div></div><footer><nobr><span class="text-title">©</span><span class="text-content">since 2012</span></nobr><wbr><nobr><span class="text-title">ICP</span><span class="text-content">沪ICP备13002173号-2</span></nobr><wbr><wbr><nobr>published with&nbsp;<a target="_blank" rel="noopener" href="http://hexo.io">Hexo&nbsp;</a></nobr><wbr><nobr>Theme&nbsp;<a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknight&nbsp;</a></nobr><wbr><nobr>powered by&nbsp;<a target="_blank" rel="noopener" href="https://github.com/Vector-Digi/">Vector Di-gi</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/arknights.js"></script><script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script></body></html>
